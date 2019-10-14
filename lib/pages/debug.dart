@@ -5,6 +5,7 @@ class DebugDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
+      padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
       children: <Widget>[
         RaisedButton(
           color: Theme.of(context).primaryColor,
@@ -54,6 +55,13 @@ class DebugDemo extends StatelessWidget {
             debugPaintLayerBordersEnabled = !debugPaintLayerBordersEnabled;
           },
           child: Text('Toggle debugPaintLayerBordersEnabled'),
+        ),
+        RaisedButton(
+          color: Theme.of(context).primaryColor,
+          onPressed: () {
+            debugRepaintRainbowEnabled = !debugRepaintRainbowEnabled;
+          },
+          child: Text('Toggle debugRepaintRainbowEnabled'),
         ),
       ],
     );

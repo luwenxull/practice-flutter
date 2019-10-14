@@ -2,11 +2,19 @@ import 'package:flutter/material.dart';
 import './menu.dart';
 import './pages/form.dart';
 import './pages/debug.dart';
+import './pages/wrap.dart';
+import './pages/listView.dart';
 
 void main() => runApp(
-  // debugPrintBeginFrameBanner = true;
-  MyApp()
-);
+    // debugPrintBeginFrameBanner = true;
+    MyApp());
+
+final menus = [
+  {'name': 'Form', 'path': '/form', 'icon': Icons.home, 'widget': FormDemo()},
+  {'name': 'Debug', 'path': '/debug', 'icon': Icons.home, 'widget': DebugDemo()},
+  {'name': 'Wrap', 'path': '/wrap', 'icon': Icons.home, 'widget': WrapDemo()},
+  {'name': 'ListView', 'path': '/list-view', 'icon': Icons.home, 'widget': ListViewDemo()},
+];
 
 Scaffold withScaffold(Widget body) {
   return Scaffold(
@@ -14,10 +22,22 @@ Scaffold withScaffold(Widget body) {
       title: Text('Pactice Flutter'),
     ),
     drawer: Drawer(
-      child: Menus(),
+      child: Menus(
+        menus: menus,
+      ),
     ),
     body: body,
   );
+}
+
+createRoutes(BuildContext context) {
+  final routes = {
+    '/': (_) => withScaffold(menus[0]['widget']),
+  };
+  menus.forEach((item) {
+    routes[item['path']] = (_) => withScaffold(item['widget']);
+  });
+  return routes;
 }
 
 class MyApp extends StatelessWidget {
@@ -39,11 +59,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       // home: MyHomePage(title: 'Flutter Demo Home Page'),
-      routes: {
-        '/': (_) => withScaffold(FormDemo()),
-        '/form': (_) => withScaffold(FormDemo()),
-        '/debug': (_) => withScaffold(DebugDemo()),
-      },
+      routes: createRoutes(context),
     );
   }
 }

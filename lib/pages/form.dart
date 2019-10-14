@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 
 class FormDemo extends StatefulWidget {
   @override
-  _FormDemoState createState() => _FormDemoState();
+  _FormDemo createState() => _FormDemo();
 }
 
-class _FormDemoState extends State<FormDemo> {
+class _FormDemo extends State<FormDemo> {
   final _formKey = GlobalKey<FormState>();
-  final emailController = TextEditingController();
+  final inputController = TextEditingController();
 
   _printInput(BuildContext context) {
     // if (_formKey.currentState.validate()) {
     Scaffold.of(context).showSnackBar(
       SnackBar(
-        content: Text('Your input: ' + emailController.text),
+        content: Text('Your input: ' + inputController.text),
         backgroundColor: Colors.red,
       ),
     );
@@ -23,7 +23,7 @@ class _FormDemoState extends State<FormDemo> {
   @override
   void dispose() {
     super.dispose();
-    emailController.dispose();
+    inputController.dispose();
   }
 
   @override
@@ -36,7 +36,7 @@ class _FormDemoState extends State<FormDemo> {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             TextField(
-              controller: emailController,
+              controller: inputController,
               decoration: InputDecoration(labelText: '请输入'),
             ),
             SizedBox(
