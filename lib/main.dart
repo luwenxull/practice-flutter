@@ -3,7 +3,8 @@ import './menu.dart';
 import './pages/form.dart';
 import './pages/debug.dart';
 import './pages/wrap.dart';
-import './pages/listView.dart';
+// import './pages/listView.dart';
+import './pages/scrollView/index.dart';
 import './pages/animations/index.dart';
 
 void main() => runApp(
@@ -14,7 +15,8 @@ final menus = [
   {'name': 'Form', 'path': '/form', 'icon': Icons.home, 'widget': FormDemo()},
   {'name': 'Debug', 'path': '/debug', 'icon': Icons.home, 'widget': DebugDemo()},
   {'name': 'Wrap', 'path': '/wrap', 'icon': Icons.home, 'widget': WrapDemo()},
-  {'name': 'ListView', 'path': '/list-view', 'icon': Icons.home, 'widget': ListViewDemo()},
+  // {'name': 'ListView', 'path': '/list-view', 'icon': Icons.home, 'widget': ListViewDemo()},
+  {'name': 'ScrollView', 'path': '/scroll-view', 'icon': Icons.home, 'widget': ScrollViewDemo()},
   {'name': 'Animations', 'path': '/aimations', 'icon': Icons.home, 'widget': AnimationsDemo()},
 ];
 
