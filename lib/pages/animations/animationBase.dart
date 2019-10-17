@@ -1,35 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class AnimatedLogo extends StatelessWidget {
-  final Widget child;
-  final Animation<double> animation;
-  AnimatedLogo({@required this.child, @required this.animation});
-
+class AnimationsBaseDemo extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: AnimatedBuilder(
-        animation: animation,
-        builder: (_, child) => Container(
-          child: child,
-          width: animation.value,
-          height: animation.value,
-        ),
-        child: child,
-      ),
-    );
-  }
+  _AnimationsBaseDemo createState() => _AnimationsBaseDemo();
 }
 
-class AnimationsWithAnimatedBuilderDemo extends StatefulWidget {
-  @override
-  _AnimationsWithAnimatedBuilderDemo createState() =>
-      _AnimationsWithAnimatedBuilderDemo();
-}
-
-class _AnimationsWithAnimatedBuilderDemo
-    extends State<AnimationsWithAnimatedBuilderDemo>
+class _AnimationsBaseDemo extends State<AnimationsBaseDemo>
     with SingleTickerProviderStateMixin {
   Animation animation;
   AnimationController controller;
@@ -38,8 +15,11 @@ class _AnimationsWithAnimatedBuilderDemo
   void initState() {
     super.initState();
     controller =
-        AnimationController(duration: const Duration(milliseconds: 700), vsync: this);
-    animation = Tween(begin: 100.0, end: 300.0).animate(controller);
+        AnimationController(duration: const Duration(milliseconds: 700)), vsync: this);
+    animation = Tween(begin: 100.0, end: 300.0).animate(controller)
+      ..addListener(() {
+        setState(() {});
+      });
   }
 
   @override
@@ -52,9 +32,13 @@ class _AnimationsWithAnimatedBuilderDemo
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        AnimatedLogo(
-          child: FlutterLogo(),
-          animation: animation,
+        Center(
+          child: Container(
+            margin: EdgeInsets.symmetric(vertical: 10),
+            width: animation.value,
+            height: animation.value,
+            child: FlutterLogo(),
+          ),
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,

@@ -1,35 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class AnimatedLogo extends StatelessWidget {
-  final Widget child;
-  final Animation<double> animation;
-  AnimatedLogo({@required this.child, @required this.animation});
+class AnimatedLogo extends AnimatedWidget {
+  static final Tween sizeTween = Tween(begin: 0.0, end: 1.0);
+  static final Tween opacityTwenn = Tween(begin: 100, end: 300);
 
-  @override
+  AnimatedLogo({Key key, @required Animation<double> animation})
+      : super(key: key, listenable: animation);
+
   Widget build(BuildContext context) {
+    final animation = listenable as Animation<double>;
     return Center(
-      child: AnimatedBuilder(
-        animation: animation,
-        builder: (_, child) => Container(
-          child: child,
-          width: animation.value,
+      child: Opacity(
+        opacity: opacityTwenn.evaluate(animation),
+        child: Container(
+          margin: EdgeInsets.symmetric(vertical: 10),
           height: animation.value,
+          width: animation.value,
+          child: FlutterLogo(),
         ),
-        child: child,
       ),
     );
   }
 }
 
-class AnimationsWithAnimatedBuilderDemo extends StatefulWidget {
+class AnimationsSimultaneousDemo extends StatefulWidget {
   @override
-  _AnimationsWithAnimatedBuilderDemo createState() =>
-      _AnimationsWithAnimatedBuilderDemo();
+  _AnimationsSimultaneousDemo createState() =>
+      _AnimationsSimultaneousDemo();
 }
 
-class _AnimationsWithAnimatedBuilderDemo
-    extends State<AnimationsWithAnimatedBuilderDemo>
+class _AnimationsSimultaneousDemo
+    extends State<AnimationsSimultaneousDemo>
     with SingleTickerProviderStateMixin {
   Animation animation;
   AnimationController controller;
@@ -37,9 +39,9 @@ class _AnimationsWithAnimatedBuilderDemo
   @override
   void initState() {
     super.initState();
-    controller =
-        AnimationController(duration: const Duration(milliseconds: 700), vsync: this);
-    animation = Tween(begin: 100.0, end: 300.0).animate(controller);
+    controller = AnimationController(
+        duration: const Duration(milliseconds: 700), vsync: this);
+    animation = CurvedAnimation(parent: controller, curve: Curves.easeIn);
   }
 
   @override
@@ -53,7 +55,6 @@ class _AnimationsWithAnimatedBuilderDemo
     return Column(
       children: <Widget>[
         AnimatedLogo(
-          child: FlutterLogo(),
           animation: animation,
         ),
         Row(

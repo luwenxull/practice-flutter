@@ -32,7 +32,7 @@ class _AnimationsWithAnimatedWidgetDemo extends State<AnimationsWithAnimatedWidg
   void initState() {
     super.initState();
     controller =
-        AnimationController(duration: const Duration(seconds: 2), vsync: this);
+        AnimationController(duration: const Duration(milliseconds: 700), vsync: this);
     animation = Tween(begin: 100.0, end: 300.0).animate(controller);
   }
 

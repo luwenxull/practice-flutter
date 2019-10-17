@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import './animation.dart';
+import './animationBase.dart';
 import './animationWithAnimatedWidget.dart';
 import './animationWithAnimatedBuilder.dart';
+import './animationSimultaneous.dart';
 
 class AnimationsDemo extends StatelessWidget {
   @override
@@ -11,6 +12,7 @@ class AnimationsDemo extends StatelessWidget {
         AnimationsBaseDemo(),
         AnimationsWithAnimatedWidgetDemo(),
         AnimationsWithAnimatedBuilderDemo(),
+        AnimationsSimultaneousDemo(),
       ],
     );
   }
