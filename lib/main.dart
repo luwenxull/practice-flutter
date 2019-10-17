@@ -4,6 +4,7 @@ import './pages/form.dart';
 import './pages/debug.dart';
 import './pages/wrap.dart';
 import './pages/listView.dart';
+import './pages/animations/index.dart';
 
 void main() => runApp(
     // debugPrintBeginFrameBanner = true;
@@ -14,6 +15,7 @@ final menus = [
   {'name': 'Debug', 'path': '/debug', 'icon': Icons.home, 'widget': DebugDemo()},
   {'name': 'Wrap', 'path': '/wrap', 'icon': Icons.home, 'widget': WrapDemo()},
   {'name': 'ListView', 'path': '/list-view', 'icon': Icons.home, 'widget': ListViewDemo()},
+  {'name': 'Animations', 'path': '/aimations', 'icon': Icons.home, 'widget': AnimationsDemo()},
 ];
 
 Scaffold withScaffold(Widget body) {
