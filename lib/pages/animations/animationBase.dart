@@ -15,7 +15,7 @@ class _AnimationsBaseDemo extends State<AnimationsBaseDemo>
   void initState() {
     super.initState();
     controller =
-        AnimationController(duration: const Duration(milliseconds: 700)), vsync: this);
+        AnimationController(duration: const Duration(milliseconds: 700), vsync: this);
     animation = Tween(begin: 100.0, end: 300.0).animate(controller)
       ..addListener(() {
         setState(() {});

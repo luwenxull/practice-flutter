@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class AnimatedLogo extends AnimatedWidget {
-  static final Tween sizeTween = Tween(begin: 0.0, end: 1.0);
-  static final Tween opacityTwenn = Tween(begin: 100, end: 300);
+  static final Tween sizeTween = Tween(begin: 100.0, end: 300.0);
+  static final Tween opacityTwenn = Tween(begin: 0.0, end: 1.0);
 
   AnimatedLogo({Key key, @required Animation<double> animation})
       : super(key: key, listenable: animation);
@@ -15,8 +15,8 @@ class AnimatedLogo extends AnimatedWidget {
         opacity: opacityTwenn.evaluate(animation),
         child: Container(
           margin: EdgeInsets.symmetric(vertical: 10),
-          height: animation.value,
-          width: animation.value,
+          height: sizeTween.evaluate(animation),
+          width: sizeTween.evaluate(animation),
           child: FlutterLogo(),
         ),
       ),
@@ -40,7 +40,7 @@ class _AnimationsSimultaneousDemo
   void initState() {
     super.initState();
     controller = AnimationController(
-        duration: const Duration(milliseconds: 700), vsync: this);
+        duration: const Duration(milliseconds: 400), vsync: this);
     animation = CurvedAnimation(parent: controller, curve: Curves.easeIn);
   }
 
