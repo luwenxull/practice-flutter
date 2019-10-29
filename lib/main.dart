@@ -1,24 +1,10 @@
 import 'package:flutter/material.dart';
 import './menu.dart';
-import './pages/form.dart';
-import './pages/debug.dart';
-import './pages/wrap.dart';
-// import './pages/listView.dart';
-import './pages/scrollView/index.dart';
-import './pages/animations/index.dart';
 
 void main() => runApp(
-    // debugPrintBeginFrameBanner = true;
-    MyApp());
-
-final menus = [
-  {'name': 'Form', 'path': '/form', 'icon': Icons.home, 'widget': FormDemo()},
-  {'name': 'Debug', 'path': '/debug', 'icon': Icons.home, 'widget': DebugDemo()},
-  {'name': 'Wrap', 'path': '/wrap', 'icon': Icons.home, 'widget': WrapDemo()},
-  // {'name': 'ListView', 'path': '/list-view', 'icon': Icons.home, 'widget': ListViewDemo()},
-  {'name': 'ScrollView', 'path': '/scroll-view', 'icon': Icons.home, 'widget': ScrollViewDemo()},
-  {'name': 'Animations', 'path': '/aimations', 'icon': Icons.home, 'widget': AnimationsDemo()},
-];
+      // debugPrintBeginFrameBanner = true;
+      MyApp(),
+    );
 
 Scaffold withScaffold(Widget body) {
   return Scaffold(
@@ -26,9 +12,7 @@ Scaffold withScaffold(Widget body) {
       title: Text('Pactice Flutter'),
     ),
     drawer: Drawer(
-      child: Menus(
-        menus: menus,
-      ),
+      child: Menus(),
     ),
     body: body,
   );
@@ -36,10 +20,12 @@ Scaffold withScaffold(Widget body) {
 
 createRoutes(BuildContext context) {
   final routes = {
-    '/': (_) => withScaffold(menus[0]['widget']),
+    '/': (_) => withScaffold(menus[0].children[0].widget),
   };
-  menus.forEach((item) {
-    routes[item['path']] = (_) => withScaffold(item['widget']);
+  menus.forEach((cate) {
+    cate.children.forEach((item) {
+      routes[item.path] = (_) => withScaffold(item.widget);
+    });
   });
   return routes;
 }
