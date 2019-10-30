@@ -48,34 +48,30 @@ class _MenusState extends State<Menus> {
   // Navigator.pushNamed(context, menu['path']);
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Container(
-        child: ExpansionPanelList(
-          expansionCallback: (int index, bool isExpanded) {
-            setState(() {
-              menus[index].expanded = !isExpanded;
-            });
-          },
-          children: menus.map((cate) {
-            return ExpansionPanel(
-              headerBuilder: (BuildContext context, bool isExpanded) {
+      child: ExpansionPanelList(
+        expansionCallback: (int index, bool isExpanded) {
+          setState(() {
+            menus[index].expanded = !isExpanded;
+          });
+        },
+        children: menus.map((cate) {
+          return ExpansionPanel(
+            headerBuilder: (BuildContext context, bool isExpanded) {
+              return ListTile(
+                title: Text(cate.name),
+              );
+            },
+            body: Column(
+              children: cate.children.map((item) {
                 return ListTile(
-                  title: Text(cate.name),
+                  title: Text(item.name),
                 );
-              },
-              body: ListView(
-                // todo significantly expensive
-                shrinkWrap: true,
-                children: cate.children.map((item) {
-                  return ListTile(
-                    title: Text(item.name),
-                  );
-                }).toList(),
-              ),
-              // body: Text('tes'),
-              isExpanded: cate.expanded,
-            );
-          }).toList(),
-        ),
+              }).toList(),
+            ),
+            // body: Text('tes'),
+            isExpanded: cate.expanded,
+          );
+        }).toList(),
       ),
     );
   }
